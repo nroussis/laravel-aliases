@@ -1,6 +1,9 @@
 {
-    "name": "dave-james-miller/aliases",
-    "description": "Adds an 'astisan aliases' command that lists registered aliases and the classes they map to, including resolving facades",
+    "name": "davejamesmiller/laravel-aliases",
+    "description": "Adds an 'artisan aliases' command to Laravel that lists registered aliases and the classes they map to, including resolving facades",
+    "keywords": [
+        "laravel-aliases"
+    ],
     "authors": [
         {
             "name": "Dave James Miller",
