@@ -7,9 +7,11 @@
     "authors": [
         {
             "name": "Dave James Miller",
-            "email": "dave@davejamesmiller.com"
+            "email": "dave@davejamesmiller.com",
+            "homepage": "http://davejamesmiller.com/"
         }
     ],
+    "license": "MIT",
     "require": {
         "php": ">=5.3.0",
         "illuminate/support": "4.0.x"
