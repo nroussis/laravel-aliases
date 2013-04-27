@@ -3,8 +3,9 @@
 Adds an `artisan aliases` command to [Laravel 4][1] that lists registered
 aliases and the classes they map to, including resolving facades.
 
-This saves you having to [look them up][2], and also works with custom aliases
-and [facades][3].
+This saves you having to [look them up][2], and works with custom aliases and
+[facades][3] as well. It's also easier than [calling getFacadeRoot() manually][4]
+and gives you more detail about the class hierarchy.
 
 ## Installation
 
@@ -16,7 +17,7 @@ composer require davejamesmiller/laravel-aliases dev-master
 This will update `composer.json` and install it into the `vendor/` directory.
 
 **Note:** `dev-master` is the latest development version.
-See the [Packagist website][4] for a list of other versions.
+See the [Packagist website][5] for a list of other versions.
 
 ### 2. Add to `app/config/app.php`
 ```php
@@ -102,11 +103,17 @@ Response
 alias  > Illuminate\Support\Facades\Response
 ```
 
+## Thanks to
+I got the idea from [this Fideloper blog post][4], and worked out how to
+implement it by looking at [this phpDoc generator by barryvdh][6].
+
 ## License
-MIT License. See [LICENSE.txt][5].
+MIT License. See [LICENSE.txt][7].
 
 [1]: http://four.laravel.com/
 [2]: http://forums.laravel.io/viewtopic.php?id=4998
 [3]: http://fideloper.com/create-facade-laravel-4
-[4]: https://packagist.org/packages/davejamesmiller/laravel-aliases
-[5]: LICENSE.txt
+[4]: http://fideloper.com/laravel-facade-root
+[5]: https://packagist.org/packages/davejamesmiller/laravel-aliases
+[6]: https://github.com/barryvdh/laravel-ide-helper
+[7]: LICENSE.txt
