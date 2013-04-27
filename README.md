@@ -13,7 +13,7 @@ and [facades][3].
 composer require davejamesmiller/laravel-aliases dev-master
 ```
 
-This will update `composer.json` and install it.
+This will update `composer.json` and install it into the `vendor/` directory.
 
 **Note:** `dev-master` is the latest development version.
 See the [Packagist website][4] for a list of other versions.
@@ -25,6 +25,8 @@ See the [Packagist website][4] for a list of other versions.
         'DaveJamesMiller\Aliases\AliasesServiceProvider',
     ),
 ```
+
+This registers the Artisan task with Laravel.
 
 ## Usage
 ### Show all aliases
