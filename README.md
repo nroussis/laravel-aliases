@@ -1,6 +1,10 @@
 # Laravel Aliases
 
-TODO
+Adds an `artisan aliases` command to [Laravel 4][1] that lists registered
+aliases and the classes they map to, including resolving facades.
+
+This saves you having to [look them up][2], and also works with custom aliases
+and [facades][3].
 
 ## Installation
 
@@ -12,7 +16,7 @@ composer require davejamesmiller/laravel-aliases dev-master
 This will update `composer.json` and install it.
 
 **Note:** `dev-master` is the latest development version.
-See the [Packagist website][1] for a list of other versions.
+See the [Packagist website][4] for a list of other versions.
 
 ### 2. Add to `app/config/app.php`
 ```php
@@ -97,7 +101,10 @@ alias  > Illuminate\Support\Facades\Response
 ```
 
 ## License
-MIT License. See [LICENSE.txt][2].
+MIT License. See [LICENSE.txt][5].
 
-[1]: https://packagist.org/packages/davejamesmiller/laravel-aliases
-[2]: LICENSE.txt
+[1]: http://four.laravel.com/
+[2]: http://forums.laravel.io/viewtopic.php?id=4998
+[3]: http://fideloper.com/create-facade-laravel-4
+[4]: https://packagist.org/packages/davejamesmiller/laravel-aliases
+[5]: LICENSE.txt
