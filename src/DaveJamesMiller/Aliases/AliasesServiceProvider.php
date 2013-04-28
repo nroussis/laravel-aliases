@@ -5,11 +5,14 @@ use Illuminate\Support\ServiceProvider;
 class AliasesServiceProvider extends ServiceProvider {
 
 	/**
-	 * Indicates if loading of the provider is deferred.
+	 * Get the services provided by the provider.
 	 *
-	 * @var bool
+	 * @return array
 	 */
-	protected $defer = false;
+	public function provides()
+	{
+		return array('command.aliases');
+	}
 
 	/**
 	 * Register the service provider.
@@ -18,17 +21,12 @@ class AliasesServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->commands('DaveJamesMiller\Aliases\AliasesCommand');
-	}
+		$this->app['command.aliases'] = $this->app->share(function($app)
+		{
+			return new AliasesCommand;
+		});
 
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return array();
+		$this->commands('command.aliases');
 	}
 
 }
