@@ -2,6 +2,7 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\AliasLoader;
+use ReflectionMethod;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -20,6 +21,18 @@ class AliasesCommand extends Command {
 	 * @var string
 	 */
 	protected $description = 'List registered aliases and the classes they map to, including resolving facades';
+
+	/**
+	 * Get the console command arguments.
+	 *
+	 * @return array
+	 */
+	protected function getArguments()
+	{
+		return array(
+			array('filter', InputArgument::OPTIONAL, 'An alias name or prefix to filter by, case-insensitive. e.g. "re" for Redirect, Request, etc.'),
+		);
+	}
 
 	/**
 	 * Execute the console command.
@@ -58,52 +71,42 @@ class AliasesCommand extends Command {
 				else
 					$this->line("<info>-></info> $class");
 
-				// If it's a Facade (but only the top-level class, not a custom subclass),
-				// find the class it resolves to which does all the real work
-				if (get_parent_class($class) == 'Illuminate\Support\Facades\Facade') {
-
+				if ($this->isFacade($class))
+				{
 					if ($verbose)
 					{
-						// Hack to find out the name of the variable in the IoC container
-						$method = new \ReflectionMethod($class, 'getFacadeAccessor');
-						$method->setAccessible(true);
-						$name = $method->invoke(null);
-
-						// Some facades return an object not a name, e.g. Illuminate\Support\Facades\Blade
-						if (is_string($name))
-						{
-							$this->line("<info>facade  ></info> <comment>App::make('$name')</comment>");
-						}
+						if ($accessor = $this->getFacadeAccessor($class))
+							$this->line("<info>facade  ></info> <comment>App::make('$accessor')</comment>");
 						else
-						{
 							$this->line("<info>facade  ></info> <comment>$class::getFacadeRoot()</comment>");
-						}
-
 					}
 
 					$type = 'resolve';
 					$class = get_class($class::getFacadeRoot());
 				}
-
-				// Otherwise look for a parent class
-				else {
-					$class = get_parent_class($class);
+				else
+				{
 					$type = 'parent ';
+					$class = get_parent_class($class);
 				}
 			}
 		}
 	}
 
-	/**
-	 * Get the console command arguments.
-	 *
-	 * @return array
-	 */
-	protected function getArguments()
+	protected function isFacade($class)
 	{
-		return array(
-			array('filter', InputArgument::OPTIONAL, 'An alias name or prefix to filter by, case-insensitive. e.g. "re" for Redirect, Request, etc.'),
-		);
+		return get_parent_class($class) == 'Illuminate\Support\Facades\Facade';
+	}
+
+	protected function getFacadeAccessor($class)
+	{
+		// HACK!!
+		$method = new ReflectionMethod($class, 'getFacadeAccessor');
+		$method->setAccessible(true);
+		$accessor = $method->invoke(null);
+
+		// Some facades return an object not a name, e.g. Illuminate\Support\Facades\Blade
+		return is_string($accessor) ? $accessor : null;
 	}
 
 }
