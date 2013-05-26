@@ -50,7 +50,7 @@ class AliasesCommand extends Command {
 			$this->comment($alias);
 
 			// Display the class that this alias maps to and all of its parents
-			$type = 'alias ';
+			$type = 'alias  ';
 			while ($class) {
 
 				if ($verbose)
@@ -61,14 +61,34 @@ class AliasesCommand extends Command {
 				// If it's a Facade (but only the top-level class, not a custom subclass),
 				// find the class it resolves to which does all the real work
 				if (get_parent_class($class) == 'Illuminate\Support\Facades\Facade') {
+
+					if ($verbose)
+					{
+						// Hack to find out the name of the variable in the IoC container
+						$method = new \ReflectionMethod($class, 'getFacadeAccessor');
+						$method->setAccessible(true);
+						$name = $method->invoke(null);
+
+						// Some facades return an object not a name, e.g. Illuminate\Support\Facades\Blade
+						if (is_string($name))
+						{
+							$this->line("<info>facade  ></info> <comment>App::make('$name')</comment>");
+						}
+						else
+						{
+							$this->line("<info>facade  ></info> <comment>$class::getFacadeRoot()</comment>");
+						}
+
+					}
+
+					$type = 'resolve';
 					$class = get_class($class::getFacadeRoot());
-					$type = 'facade';
 				}
 
 				// Otherwise look for a parent class
 				else {
 					$class = get_parent_class($class);
-					$type = 'parent';
+					$type = 'parent ';
 				}
 			}
 		}

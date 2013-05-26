@@ -86,21 +86,24 @@ e.g.
 
 ```
 Redirect
-alias  > Illuminate\Support\Facades\Redirect
-facade > Illuminate\Routing\Redirector
+alias   > Illuminate\Support\Facades\Redirect
+facade  > App::make('redirect')
+resolve > Illuminate\Routing\Redirector
 
 Redis
-alias  > Illuminate\Support\Facades\Redis
-facade > Illuminate\Redis\Database
+alias   > Illuminate\Support\Facades\Redis
+facade  > App::make('redis')
+resolve > Illuminate\Redis\Database
 
 Request
-alias  > CustomRequest
-parent > Illuminate\Support\Facades\Request
-facade > Illuminate\Http\Request
-parent > Symfony\Component\HttpFoundation\Request
+alias   > CustomRequest
+parent  > Illuminate\Support\Facades\Request
+facade  > App::make('request')
+resolve > Illuminate\Http\Request
+parent  > Symfony\Component\HttpFoundation\Request
 
 Response
-alias  > Illuminate\Support\Facades\Response
+alias   > Illuminate\Support\Facades\Response
 ```
 
 ## Thanks to
