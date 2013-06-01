@@ -113,6 +113,9 @@ alias   > Illuminate\Support\Facades\Response
 ### 0.2.0
 * Show how facades are resolved when using verbose (`-v`) flag (e.g. `App::make('url')`)
 
+### 1.0.0
+*Version bump - no changes.*
+
 ## Thanks to
 I got the idea from [this Fideloper blog post][4], and worked out how to
 implement it by looking at [this phpDoc generator by barryvdh][6].
