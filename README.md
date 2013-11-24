@@ -116,6 +116,9 @@ alias   > Illuminate\Support\Facades\Response
 ### 1.0.0
 *Version bump - no changes.*
 
+### 1.0.1
+* Compatibility with Laravel 4.1.
+
 ## Thanks to
 I got the idea from [this Fideloper blog post][4], and worked out how to
 implement it by looking at [this phpDoc generator by barryvdh][6].
