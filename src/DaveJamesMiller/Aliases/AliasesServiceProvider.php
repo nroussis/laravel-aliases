@@ -21,10 +21,7 @@ class AliasesServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['command.aliases'] = $this->app->share(function($app)
-		{
-			return new AliasesCommand;
-		});
+		$this->app->singleton('command.aliases', 'DaveJamesMiller\Aliases\AliasesCommand');
 
 		$this->commands('command.aliases');
 	}
