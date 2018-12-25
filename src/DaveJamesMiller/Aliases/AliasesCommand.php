@@ -33,6 +33,17 @@ class AliasesCommand extends Command {
 			array('filter', InputArgument::OPTIONAL, 'An alias name or prefix to filter by, case-insensitive. e.g. "re" for Redirect, Request, etc.'),
 		);
 	}
+	
+	/**
+	 * Handles fire (needed to make compatible with  current Laravel 5.7)
+	 *
+	 * @returns void
+	 */
+	
+	public function handle()
+    	{
+        	$this->fire();
+    	}
 
 	/**
 	 * Execute the console command.
